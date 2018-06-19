@@ -1,0 +1,5 @@
+C:\Users\asc\Source\Repos\WebUnivercity\WU_ValueObjects\bin\Debug\WU_ValueObjects.dll
+C:\Users\asc\Source\Repos\WebUnivercity\WU_ValueObjects\bin\Debug\WU_ValueObjects.pdb
+C:\Users\asc\Source\Repos\WebUnivercity\WU_ValueObjects\obj\Debug\WU_ValueObjects.csproj.CoreCompileInputs.cache
+C:\Users\asc\Source\Repos\WebUnivercity\WU_ValueObjects\obj\Debug\WU_ValueObjects.dll
+C:\Users\asc\Source\Repos\WebUnivercity\WU_ValueObjects\obj\Debug\WU_ValueObjects.pdb

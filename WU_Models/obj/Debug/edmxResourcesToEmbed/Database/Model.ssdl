@@ -1,0 +1,342 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Univercity02Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Accounts">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+    <Property Name="PassWord" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="Mobile" Type="nvarchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="CertificateClass">
+    <Key>
+      <PropertyRef Name="ClassId" />
+    </Key>
+    <Property Name="ClassId" Type="bigint" Nullable="false" />
+    <Property Name="ClassName" Type="nvarchar" MaxLength="50" />
+    <Property Name="SubjectId" Type="bigint" />
+    <Property Name="StartDate" Type="date" />
+    <Property Name="EndDate" Type="date" />
+    <Property Name="ProfessorId" Type="bigint" />
+  </EntityType>
+  <EntityType Name="DegreeProgram">
+    <Key>
+      <PropertyRef Name="ProgramId" />
+    </Key>
+    <Property Name="ProgramId" Type="bigint" Nullable="false" />
+    <Property Name="ProgramName" Type="nvarchar" MaxLength="50" />
+    <Property Name="FacultyId" Type="bigint" />
+    <Property Name="ProfessorId" Type="bigint" />
+  </EntityType>
+  <EntityType Name="Faculty">
+    <Key>
+      <PropertyRef Name="FacultyId" />
+    </Key>
+    <Property Name="FacultyId" Type="bigint" Nullable="false" />
+    <Property Name="FacultyName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="FacultyProfessor">
+    <Key>
+      <PropertyRef Name="FacultyId" />
+      <PropertyRef Name="ProfessorId" />
+    </Key>
+    <Property Name="FacultyId" Type="bigint" Nullable="false" />
+    <Property Name="ProfessorId" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Professor">
+    <Key>
+      <PropertyRef Name="ProfessorId" />
+    </Key>
+    <Property Name="ProfessorId" Type="bigint" Nullable="false" />
+    <Property Name="ProfessorName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="StudentId" />
+    </Key>
+    <Property Name="StudentId" Type="bigint" Nullable="false" />
+    <Property Name="StudenName" Type="nvarchar" MaxLength="50" />
+    <Property Name="ProgramId" Type="bigint" />
+  </EntityType>
+  <EntityType Name="StudentClass">
+    <Key>
+      <PropertyRef Name="StudentId" />
+      <PropertyRef Name="ClassId" />
+    </Key>
+    <Property Name="StudentId" Type="bigint" Nullable="false" />
+    <Property Name="ClassId" Type="bigint" Nullable="false" />
+    <Property Name="TestScore" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="StudentTest">
+    <Key>
+      <PropertyRef Name="StudentId" />
+      <PropertyRef Name="ClassId" />
+    </Key>
+    <Property Name="StudentId" Type="bigint" Nullable="false" />
+    <Property Name="ClassId" Type="bigint" Nullable="false" />
+    <Property Name="FirstScore" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="SecondScore" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="ThirdScore" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="Subject">
+    <Key>
+      <PropertyRef Name="SubjectId" />
+    </Key>
+    <Property Name="SubjectId" Type="bigint" Nullable="false" />
+    <Property Name="SubjectName" Type="nvarchar" MaxLength="50" />
+    <Property Name="FacultyId" Type="bigint" />
+  </EntityType>
+  <Association Name="FK_01">
+    <End Role="Faculty" Type="Self.Faculty" Multiplicity="1" />
+    <End Role="FacultyProfessor" Type="Self.FacultyProfessor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Faculty">
+        <PropertyRef Name="FacultyId" />
+      </Principal>
+      <Dependent Role="FacultyProfessor">
+        <PropertyRef Name="FacultyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_02">
+    <End Role="Professor" Type="Self.Professor" Multiplicity="1" />
+    <End Role="FacultyProfessor" Type="Self.FacultyProfessor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Professor">
+        <PropertyRef Name="ProfessorId" />
+      </Principal>
+      <Dependent Role="FacultyProfessor">
+        <PropertyRef Name="ProfessorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_03">
+    <End Role="Faculty" Type="Self.Faculty" Multiplicity="0..1" />
+    <End Role="DegreeProgram" Type="Self.DegreeProgram" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Faculty">
+        <PropertyRef Name="FacultyId" />
+      </Principal>
+      <Dependent Role="DegreeProgram">
+        <PropertyRef Name="FacultyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_04">
+    <End Role="Professor" Type="Self.Professor" Multiplicity="0..1" />
+    <End Role="DegreeProgram" Type="Self.DegreeProgram" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Professor">
+        <PropertyRef Name="ProfessorId" />
+      </Principal>
+      <Dependent Role="DegreeProgram">
+        <PropertyRef Name="ProfessorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_05">
+    <End Role="Faculty" Type="Self.Faculty" Multiplicity="0..1" />
+    <End Role="Subject" Type="Self.Subject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Faculty">
+        <PropertyRef Name="FacultyId" />
+      </Principal>
+      <Dependent Role="Subject">
+        <PropertyRef Name="FacultyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_06">
+    <End Role="Subject" Type="Self.Subject" Multiplicity="0..1" />
+    <End Role="CertificateClass" Type="Self.CertificateClass" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subject">
+        <PropertyRef Name="SubjectId" />
+      </Principal>
+      <Dependent Role="CertificateClass">
+        <PropertyRef Name="SubjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_07">
+    <End Role="Professor" Type="Self.Professor" Multiplicity="0..1" />
+    <End Role="CertificateClass" Type="Self.CertificateClass" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Professor">
+        <PropertyRef Name="ProfessorId" />
+      </Principal>
+      <Dependent Role="CertificateClass">
+        <PropertyRef Name="ProfessorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_08">
+    <End Role="DegreeProgram" Type="Self.DegreeProgram" Multiplicity="0..1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DegreeProgram">
+        <PropertyRef Name="ProgramId" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="ProgramId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_09">
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="StudentClass" Type="Self.StudentClass" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StudentId" />
+      </Principal>
+      <Dependent Role="StudentClass">
+        <PropertyRef Name="StudentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_10">
+    <End Role="CertificateClass" Type="Self.CertificateClass" Multiplicity="1" />
+    <End Role="StudentClass" Type="Self.StudentClass" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CertificateClass">
+        <PropertyRef Name="ClassId" />
+      </Principal>
+      <Dependent Role="StudentClass">
+        <PropertyRef Name="ClassId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_11">
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="StudentTest" Type="Self.StudentTest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StudentId" />
+      </Principal>
+      <Dependent Role="StudentTest">
+        <PropertyRef Name="StudentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_12">
+    <End Role="CertificateClass" Type="Self.CertificateClass" Multiplicity="1" />
+    <End Role="StudentTest" Type="Self.StudentTest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CertificateClass">
+        <PropertyRef Name="ClassId" />
+      </Principal>
+      <Dependent Role="StudentTest">
+        <PropertyRef Name="ClassId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="SP_CheckLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserName" Type="varchar" Mode="In" />
+    <Parameter Name="PassWord" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_Delete_Account" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userid" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="SP_Delete_Student" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="StudentId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_Get_Account_all" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="SP_Get_CertificateClass" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="SP_Get_Professor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="SP_Get_Professor_By_Id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ProfessorId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_Get_Student_Classes_all" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="SP_Get_Student_Classes_by_ClassId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ClassId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_Insert_Account" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userid" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="username" Type="nvarchar" Mode="In" />
+    <Parameter Name="password" Type="nvarchar" Mode="In" />
+    <Parameter Name="Email" Type="nvarchar" Mode="In" />
+    <Parameter Name="Mobile" Type="nvarchar" Mode="In" />
+    <Parameter Name="Description" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="SP_Insert_Student" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="StudentId" Type="int" Mode="In" />
+    <Parameter Name="StudenName" Type="nvarchar" Mode="In" />
+    <Parameter Name="ProgramId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_Update_Account" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userid" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="username" Type="nvarchar" Mode="In" />
+    <Parameter Name="password" Type="nvarchar" Mode="In" />
+    <Parameter Name="Email" Type="nvarchar" Mode="In" />
+    <Parameter Name="Mobile" Type="nvarchar" Mode="In" />
+    <Parameter Name="Description" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="SP_Update_Student" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="StudentId" Type="int" Mode="In" />
+    <Parameter Name="StudenName" Type="nvarchar" Mode="In" />
+    <Parameter Name="ProgramId" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="Univercity02ModelStoreContainer">
+    <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CertificateClass" EntityType="Self.CertificateClass" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DegreeProgram" EntityType="Self.DegreeProgram" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Faculty" EntityType="Self.Faculty" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FacultyProfessor" EntityType="Self.FacultyProfessor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Professor" EntityType="Self.Professor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StudentClass" EntityType="Self.StudentClass" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StudentTest" EntityType="Self.StudentTest" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Subject" EntityType="Self.Subject" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_01" Association="Self.FK_01">
+      <End Role="Faculty" EntitySet="Faculty" />
+      <End Role="FacultyProfessor" EntitySet="FacultyProfessor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_02" Association="Self.FK_02">
+      <End Role="Professor" EntitySet="Professor" />
+      <End Role="FacultyProfessor" EntitySet="FacultyProfessor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_03" Association="Self.FK_03">
+      <End Role="Faculty" EntitySet="Faculty" />
+      <End Role="DegreeProgram" EntitySet="DegreeProgram" />
+    </AssociationSet>
+    <AssociationSet Name="FK_04" Association="Self.FK_04">
+      <End Role="Professor" EntitySet="Professor" />
+      <End Role="DegreeProgram" EntitySet="DegreeProgram" />
+    </AssociationSet>
+    <AssociationSet Name="FK_05" Association="Self.FK_05">
+      <End Role="Faculty" EntitySet="Faculty" />
+      <End Role="Subject" EntitySet="Subject" />
+    </AssociationSet>
+    <AssociationSet Name="FK_06" Association="Self.FK_06">
+      <End Role="Subject" EntitySet="Subject" />
+      <End Role="CertificateClass" EntitySet="CertificateClass" />
+    </AssociationSet>
+    <AssociationSet Name="FK_07" Association="Self.FK_07">
+      <End Role="Professor" EntitySet="Professor" />
+      <End Role="CertificateClass" EntitySet="CertificateClass" />
+    </AssociationSet>
+    <AssociationSet Name="FK_08" Association="Self.FK_08">
+      <End Role="DegreeProgram" EntitySet="DegreeProgram" />
+      <End Role="Student" EntitySet="Student" />
+    </AssociationSet>
+    <AssociationSet Name="FK_09" Association="Self.FK_09">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="StudentClass" EntitySet="StudentClass" />
+    </AssociationSet>
+    <AssociationSet Name="FK_10" Association="Self.FK_10">
+      <End Role="CertificateClass" EntitySet="CertificateClass" />
+      <End Role="StudentClass" EntitySet="StudentClass" />
+    </AssociationSet>
+    <AssociationSet Name="FK_11" Association="Self.FK_11">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="StudentTest" EntitySet="StudentTest" />
+    </AssociationSet>
+    <AssociationSet Name="FK_12" Association="Self.FK_12">
+      <End Role="CertificateClass" EntitySet="CertificateClass" />
+      <End Role="StudentTest" EntitySet="StudentTest" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

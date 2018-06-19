@@ -1,0 +1,934 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Univercity02Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Accounts">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="PassWord" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Mobile" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="CertificateClass">
+          <Key>
+            <PropertyRef Name="ClassId" />
+          </Key>
+          <Property Name="ClassId" Type="bigint" Nullable="false" />
+          <Property Name="ClassName" Type="nvarchar" MaxLength="50" />
+          <Property Name="SubjectId" Type="bigint" />
+          <Property Name="StartDate" Type="date" />
+          <Property Name="EndDate" Type="date" />
+          <Property Name="ProfessorId" Type="bigint" />
+        </EntityType>
+        <EntityType Name="DegreeProgram">
+          <Key>
+            <PropertyRef Name="ProgramId" />
+          </Key>
+          <Property Name="ProgramId" Type="bigint" Nullable="false" />
+          <Property Name="ProgramName" Type="nvarchar" MaxLength="50" />
+          <Property Name="FacultyId" Type="bigint" />
+          <Property Name="ProfessorId" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Faculty">
+          <Key>
+            <PropertyRef Name="FacultyId" />
+          </Key>
+          <Property Name="FacultyId" Type="bigint" Nullable="false" />
+          <Property Name="FacultyName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="FacultyProfessor">
+          <Key>
+            <PropertyRef Name="FacultyId" />
+            <PropertyRef Name="ProfessorId" />
+          </Key>
+          <Property Name="FacultyId" Type="bigint" Nullable="false" />
+          <Property Name="ProfessorId" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Professor">
+          <Key>
+            <PropertyRef Name="ProfessorId" />
+          </Key>
+          <Property Name="ProfessorId" Type="bigint" Nullable="false" />
+          <Property Name="ProfessorName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="StudentId" />
+          </Key>
+          <Property Name="StudentId" Type="bigint" Nullable="false" />
+          <Property Name="StudenName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProgramId" Type="bigint" />
+        </EntityType>
+        <EntityType Name="StudentClass">
+          <Key>
+            <PropertyRef Name="StudentId" />
+            <PropertyRef Name="ClassId" />
+          </Key>
+          <Property Name="StudentId" Type="bigint" Nullable="false" />
+          <Property Name="ClassId" Type="bigint" Nullable="false" />
+          <Property Name="TestScore" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="StudentTest">
+          <Key>
+            <PropertyRef Name="StudentId" />
+            <PropertyRef Name="ClassId" />
+          </Key>
+          <Property Name="StudentId" Type="bigint" Nullable="false" />
+          <Property Name="ClassId" Type="bigint" Nullable="false" />
+          <Property Name="FirstScore" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="SecondScore" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="ThirdScore" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Subject">
+          <Key>
+            <PropertyRef Name="SubjectId" />
+          </Key>
+          <Property Name="SubjectId" Type="bigint" Nullable="false" />
+          <Property Name="SubjectName" Type="nvarchar" MaxLength="50" />
+          <Property Name="FacultyId" Type="bigint" />
+        </EntityType>
+        <Association Name="FK_01">
+          <End Role="Faculty" Type="Self.Faculty" Multiplicity="1" />
+          <End Role="FacultyProfessor" Type="Self.FacultyProfessor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faculty">
+              <PropertyRef Name="FacultyId" />
+            </Principal>
+            <Dependent Role="FacultyProfessor">
+              <PropertyRef Name="FacultyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_02">
+          <End Role="Professor" Type="Self.Professor" Multiplicity="1" />
+          <End Role="FacultyProfessor" Type="Self.FacultyProfessor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Professor">
+              <PropertyRef Name="ProfessorId" />
+            </Principal>
+            <Dependent Role="FacultyProfessor">
+              <PropertyRef Name="ProfessorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_03">
+          <End Role="Faculty" Type="Self.Faculty" Multiplicity="0..1" />
+          <End Role="DegreeProgram" Type="Self.DegreeProgram" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faculty">
+              <PropertyRef Name="FacultyId" />
+            </Principal>
+            <Dependent Role="DegreeProgram">
+              <PropertyRef Name="FacultyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_04">
+          <End Role="Professor" Type="Self.Professor" Multiplicity="0..1" />
+          <End Role="DegreeProgram" Type="Self.DegreeProgram" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Professor">
+              <PropertyRef Name="ProfessorId" />
+            </Principal>
+            <Dependent Role="DegreeProgram">
+              <PropertyRef Name="ProfessorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_05">
+          <End Role="Faculty" Type="Self.Faculty" Multiplicity="0..1" />
+          <End Role="Subject" Type="Self.Subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faculty">
+              <PropertyRef Name="FacultyId" />
+            </Principal>
+            <Dependent Role="Subject">
+              <PropertyRef Name="FacultyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_06">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="0..1" />
+          <End Role="CertificateClass" Type="Self.CertificateClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="SubjectId" />
+            </Principal>
+            <Dependent Role="CertificateClass">
+              <PropertyRef Name="SubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_07">
+          <End Role="Professor" Type="Self.Professor" Multiplicity="0..1" />
+          <End Role="CertificateClass" Type="Self.CertificateClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Professor">
+              <PropertyRef Name="ProfessorId" />
+            </Principal>
+            <Dependent Role="CertificateClass">
+              <PropertyRef Name="ProfessorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_08">
+          <End Role="DegreeProgram" Type="Self.DegreeProgram" Multiplicity="0..1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DegreeProgram">
+              <PropertyRef Name="ProgramId" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="ProgramId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_09">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="StudentClass" Type="Self.StudentClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentId" />
+            </Principal>
+            <Dependent Role="StudentClass">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_10">
+          <End Role="CertificateClass" Type="Self.CertificateClass" Multiplicity="1" />
+          <End Role="StudentClass" Type="Self.StudentClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CertificateClass">
+              <PropertyRef Name="ClassId" />
+            </Principal>
+            <Dependent Role="StudentClass">
+              <PropertyRef Name="ClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_11">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="StudentTest" Type="Self.StudentTest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentId" />
+            </Principal>
+            <Dependent Role="StudentTest">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_12">
+          <End Role="CertificateClass" Type="Self.CertificateClass" Multiplicity="1" />
+          <End Role="StudentTest" Type="Self.StudentTest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CertificateClass">
+              <PropertyRef Name="ClassId" />
+            </Principal>
+            <Dependent Role="StudentTest">
+              <PropertyRef Name="ClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="SP_CheckLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserName" Type="varchar" Mode="In" />
+          <Parameter Name="PassWord" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_Delete_Account" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="SP_Delete_Student" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StudentId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_Get_Account_all" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_Get_CertificateClass" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_Get_Professor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_Get_Professor_By_Id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ProfessorId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_Get_Student_Classes_all" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_Get_Student_Classes_by_ClassId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ClassId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_Insert_Account" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="username" Type="nvarchar" Mode="In" />
+          <Parameter Name="password" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="Mobile" Type="nvarchar" Mode="In" />
+          <Parameter Name="Description" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SP_Insert_Student" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StudentId" Type="int" Mode="In" />
+          <Parameter Name="StudenName" Type="nvarchar" Mode="In" />
+          <Parameter Name="ProgramId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_Update_Account" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="username" Type="nvarchar" Mode="In" />
+          <Parameter Name="password" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="Mobile" Type="nvarchar" Mode="In" />
+          <Parameter Name="Description" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SP_Update_Student" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StudentId" Type="int" Mode="In" />
+          <Parameter Name="StudenName" Type="nvarchar" Mode="In" />
+          <Parameter Name="ProgramId" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="Univercity02ModelStoreContainer">
+          <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CertificateClass" EntityType="Self.CertificateClass" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DegreeProgram" EntityType="Self.DegreeProgram" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Faculty" EntityType="Self.Faculty" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FacultyProfessor" EntityType="Self.FacultyProfessor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Professor" EntityType="Self.Professor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentClass" EntityType="Self.StudentClass" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentTest" EntityType="Self.StudentTest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subject" EntityType="Self.Subject" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_01" Association="Self.FK_01">
+            <End Role="Faculty" EntitySet="Faculty" />
+            <End Role="FacultyProfessor" EntitySet="FacultyProfessor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_02" Association="Self.FK_02">
+            <End Role="Professor" EntitySet="Professor" />
+            <End Role="FacultyProfessor" EntitySet="FacultyProfessor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_03" Association="Self.FK_03">
+            <End Role="Faculty" EntitySet="Faculty" />
+            <End Role="DegreeProgram" EntitySet="DegreeProgram" />
+          </AssociationSet>
+          <AssociationSet Name="FK_04" Association="Self.FK_04">
+            <End Role="Professor" EntitySet="Professor" />
+            <End Role="DegreeProgram" EntitySet="DegreeProgram" />
+          </AssociationSet>
+          <AssociationSet Name="FK_05" Association="Self.FK_05">
+            <End Role="Faculty" EntitySet="Faculty" />
+            <End Role="Subject" EntitySet="Subject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_06" Association="Self.FK_06">
+            <End Role="Subject" EntitySet="Subject" />
+            <End Role="CertificateClass" EntitySet="CertificateClass" />
+          </AssociationSet>
+          <AssociationSet Name="FK_07" Association="Self.FK_07">
+            <End Role="Professor" EntitySet="Professor" />
+            <End Role="CertificateClass" EntitySet="CertificateClass" />
+          </AssociationSet>
+          <AssociationSet Name="FK_08" Association="Self.FK_08">
+            <End Role="DegreeProgram" EntitySet="DegreeProgram" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK_09" Association="Self.FK_09">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="StudentClass" EntitySet="StudentClass" />
+          </AssociationSet>
+          <AssociationSet Name="FK_10" Association="Self.FK_10">
+            <End Role="CertificateClass" EntitySet="CertificateClass" />
+            <End Role="StudentClass" EntitySet="StudentClass" />
+          </AssociationSet>
+          <AssociationSet Name="FK_11" Association="Self.FK_11">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="StudentTest" EntitySet="StudentTest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_12" Association="Self.FK_12">
+            <End Role="CertificateClass" EntitySet="CertificateClass" />
+            <End Role="StudentTest" EntitySet="StudentTest" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Univercity02Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PassWord" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="CertificateClass">
+          <Key>
+            <PropertyRef Name="ClassId" />
+          </Key>
+          <Property Name="ClassId" Type="Int64" Nullable="false" />
+          <Property Name="ClassName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SubjectId" Type="Int64" />
+          <Property Name="StartDate" Type="DateTime" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <Property Name="ProfessorId" Type="Int64" />
+          <NavigationProperty Name="Subject" Relationship="Self.FK_06" FromRole="CertificateClass" ToRole="Subject" />
+          <NavigationProperty Name="Professor" Relationship="Self.FK_07" FromRole="CertificateClass" ToRole="Professor" />
+          <NavigationProperty Name="StudentClasses" Relationship="Self.FK_10" FromRole="CertificateClass" ToRole="StudentClass" />
+          <NavigationProperty Name="StudentTests" Relationship="Self.FK_12" FromRole="CertificateClass" ToRole="StudentTest" />
+        </EntityType>
+        <EntityType Name="DegreeProgram">
+          <Key>
+            <PropertyRef Name="ProgramId" />
+          </Key>
+          <Property Name="ProgramId" Type="Int64" Nullable="false" />
+          <Property Name="ProgramName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FacultyId" Type="Int64" />
+          <Property Name="ProfessorId" Type="Int64" />
+          <NavigationProperty Name="Faculty" Relationship="Self.FK_03" FromRole="DegreeProgram" ToRole="Faculty" />
+          <NavigationProperty Name="Professor" Relationship="Self.FK_04" FromRole="DegreeProgram" ToRole="Professor" />
+          <NavigationProperty Name="Students" Relationship="Self.FK_08" FromRole="DegreeProgram" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="Faculty">
+          <Key>
+            <PropertyRef Name="FacultyId" />
+          </Key>
+          <Property Name="FacultyId" Type="Int64" Nullable="false" />
+          <Property Name="FacultyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DegreePrograms" Relationship="Self.FK_03" FromRole="Faculty" ToRole="DegreeProgram" />
+          <NavigationProperty Name="Subjects" Relationship="Self.FK_05" FromRole="Faculty" ToRole="Subject" />
+          <NavigationProperty Name="Professors" Relationship="Self.FacultyProfessor" FromRole="Faculty" ToRole="Professor" />
+        </EntityType>
+        <EntityType Name="Professor">
+          <Key>
+            <PropertyRef Name="ProfessorId" />
+          </Key>
+          <Property Name="ProfessorId" Type="Int64" Nullable="false" />
+          <Property Name="ProfessorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CertificateClasses" Relationship="Self.FK_07" FromRole="Professor" ToRole="CertificateClass" />
+          <NavigationProperty Name="DegreePrograms" Relationship="Self.FK_04" FromRole="Professor" ToRole="DegreeProgram" />
+          <NavigationProperty Name="Faculties" Relationship="Self.FacultyProfessor" FromRole="Professor" ToRole="Faculty" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="StudentId" />
+          </Key>
+          <Property Name="StudentId" Type="Int64" Nullable="false" />
+          <Property Name="StudenName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProgramId" Type="Int64" />
+          <NavigationProperty Name="DegreeProgram" Relationship="Self.FK_08" FromRole="Student" ToRole="DegreeProgram" />
+          <NavigationProperty Name="StudentClasses" Relationship="Self.FK_09" FromRole="Student" ToRole="StudentClass" />
+          <NavigationProperty Name="StudentTests" Relationship="Self.FK_11" FromRole="Student" ToRole="StudentTest" />
+        </EntityType>
+        <EntityType Name="StudentClass">
+          <Key>
+            <PropertyRef Name="StudentId" />
+            <PropertyRef Name="ClassId" />
+          </Key>
+          <Property Name="StudentId" Type="Int64" Nullable="false" />
+          <Property Name="ClassId" Type="Int64" Nullable="false" />
+          <Property Name="TestScore" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="CertificateClass" Relationship="Self.FK_10" FromRole="StudentClass" ToRole="CertificateClass" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_09" FromRole="StudentClass" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="StudentTest">
+          <Key>
+            <PropertyRef Name="StudentId" />
+            <PropertyRef Name="ClassId" />
+          </Key>
+          <Property Name="StudentId" Type="Int64" Nullable="false" />
+          <Property Name="ClassId" Type="Int64" Nullable="false" />
+          <Property Name="FirstScore" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SecondScore" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ThirdScore" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="CertificateClass" Relationship="Self.FK_12" FromRole="StudentTest" ToRole="CertificateClass" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_11" FromRole="StudentTest" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="Subject">
+          <Key>
+            <PropertyRef Name="SubjectId" />
+          </Key>
+          <Property Name="SubjectId" Type="Int64" Nullable="false" />
+          <Property Name="SubjectName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FacultyId" Type="Int64" />
+          <NavigationProperty Name="CertificateClasses" Relationship="Self.FK_06" FromRole="Subject" ToRole="CertificateClass" />
+          <NavigationProperty Name="Faculty" Relationship="Self.FK_05" FromRole="Subject" ToRole="Faculty" />
+        </EntityType>
+        <Association Name="FK_06">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="0..1" />
+          <End Role="CertificateClass" Type="Self.CertificateClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="SubjectId" />
+            </Principal>
+            <Dependent Role="CertificateClass">
+              <PropertyRef Name="SubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_07">
+          <End Role="Professor" Type="Self.Professor" Multiplicity="0..1" />
+          <End Role="CertificateClass" Type="Self.CertificateClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Professor">
+              <PropertyRef Name="ProfessorId" />
+            </Principal>
+            <Dependent Role="CertificateClass">
+              <PropertyRef Name="ProfessorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_10">
+          <End Role="CertificateClass" Type="Self.CertificateClass" Multiplicity="1" />
+          <End Role="StudentClass" Type="Self.StudentClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CertificateClass">
+              <PropertyRef Name="ClassId" />
+            </Principal>
+            <Dependent Role="StudentClass">
+              <PropertyRef Name="ClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_12">
+          <End Role="CertificateClass" Type="Self.CertificateClass" Multiplicity="1" />
+          <End Role="StudentTest" Type="Self.StudentTest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CertificateClass">
+              <PropertyRef Name="ClassId" />
+            </Principal>
+            <Dependent Role="StudentTest">
+              <PropertyRef Name="ClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_03">
+          <End Role="Faculty" Type="Self.Faculty" Multiplicity="0..1" />
+          <End Role="DegreeProgram" Type="Self.DegreeProgram" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faculty">
+              <PropertyRef Name="FacultyId" />
+            </Principal>
+            <Dependent Role="DegreeProgram">
+              <PropertyRef Name="FacultyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_04">
+          <End Role="Professor" Type="Self.Professor" Multiplicity="0..1" />
+          <End Role="DegreeProgram" Type="Self.DegreeProgram" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Professor">
+              <PropertyRef Name="ProfessorId" />
+            </Principal>
+            <Dependent Role="DegreeProgram">
+              <PropertyRef Name="ProfessorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_08">
+          <End Role="DegreeProgram" Type="Self.DegreeProgram" Multiplicity="0..1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DegreeProgram">
+              <PropertyRef Name="ProgramId" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="ProgramId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_05">
+          <End Role="Faculty" Type="Self.Faculty" Multiplicity="0..1" />
+          <End Role="Subject" Type="Self.Subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faculty">
+              <PropertyRef Name="FacultyId" />
+            </Principal>
+            <Dependent Role="Subject">
+              <PropertyRef Name="FacultyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_09">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="StudentClass" Type="Self.StudentClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentId" />
+            </Principal>
+            <Dependent Role="StudentClass">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_11">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="StudentTest" Type="Self.StudentTest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentId" />
+            </Principal>
+            <Dependent Role="StudentTest">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FacultyProfessor">
+          <End Role="Faculty" Type="Self.Faculty" Multiplicity="*" />
+          <End Role="Professor" Type="Self.Professor" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="Univercity02Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="Self.Account" />
+          <EntitySet Name="CertificateClasses" EntityType="Self.CertificateClass" />
+          <EntitySet Name="DegreePrograms" EntityType="Self.DegreeProgram" />
+          <EntitySet Name="Faculties" EntityType="Self.Faculty" />
+          <EntitySet Name="Professors" EntityType="Self.Professor" />
+          <EntitySet Name="Students" EntityType="Self.Student" />
+          <EntitySet Name="StudentClasses" EntityType="Self.StudentClass" />
+          <EntitySet Name="StudentTests" EntityType="Self.StudentTest" />
+          <EntitySet Name="Subjects" EntityType="Self.Subject" />
+          <AssociationSet Name="FK_06" Association="Self.FK_06">
+            <End Role="Subject" EntitySet="Subjects" />
+            <End Role="CertificateClass" EntitySet="CertificateClasses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_07" Association="Self.FK_07">
+            <End Role="Professor" EntitySet="Professors" />
+            <End Role="CertificateClass" EntitySet="CertificateClasses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_10" Association="Self.FK_10">
+            <End Role="CertificateClass" EntitySet="CertificateClasses" />
+            <End Role="StudentClass" EntitySet="StudentClasses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_12" Association="Self.FK_12">
+            <End Role="CertificateClass" EntitySet="CertificateClasses" />
+            <End Role="StudentTest" EntitySet="StudentTests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_03" Association="Self.FK_03">
+            <End Role="Faculty" EntitySet="Faculties" />
+            <End Role="DegreeProgram" EntitySet="DegreePrograms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_04" Association="Self.FK_04">
+            <End Role="Professor" EntitySet="Professors" />
+            <End Role="DegreeProgram" EntitySet="DegreePrograms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_08" Association="Self.FK_08">
+            <End Role="DegreeProgram" EntitySet="DegreePrograms" />
+            <End Role="Student" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_05" Association="Self.FK_05">
+            <End Role="Faculty" EntitySet="Faculties" />
+            <End Role="Subject" EntitySet="Subjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_09" Association="Self.FK_09">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="StudentClass" EntitySet="StudentClasses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_11" Association="Self.FK_11">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="StudentTest" EntitySet="StudentTests" />
+          </AssociationSet>
+          <AssociationSet Name="FacultyProfessor" Association="Self.FacultyProfessor">
+            <End Role="Faculty" EntitySet="Faculties" />
+            <End Role="Professor" EntitySet="Professors" />
+          </AssociationSet>
+          <FunctionImport Name="SP_CheckLogin" ReturnType="Collection(Univercity02Model.SP_CheckLogin_Result)">
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="PassWord" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Delete_Student">
+          <Parameter Name="StudentId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Get_CertificateClass" ReturnType="Collection(Univercity02Model.SP_Get_CertificateClass_Result)" />
+          <FunctionImport Name="SP_Get_Professor" ReturnType="Collection(Univercity02Model.SP_Get_Professor_Result)" />
+          <FunctionImport Name="SP_Get_Professor_By_Id" ReturnType="Collection(Univercity02Model.SP_Get_Professor_By_Id_Result)">
+          <Parameter Name="ProfessorId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Get_Student_Classes_all" ReturnType="Collection(Univercity02Model.SP_Get_Student_Classes_all_Result)" />
+          <FunctionImport Name="SP_Get_Student_Classes_by_ClassId" ReturnType="Collection(Univercity02Model.SP_Get_Student_Classes_by_ClassId_Result)">
+          <Parameter Name="ClassId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Insert_Student">
+            <Parameter Name="StudentId" Mode="In" Type="Int32" />
+            <Parameter Name="StudenName" Mode="In" Type="String" />
+            <Parameter Name="ProgramId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Update_Student">
+            <Parameter Name="StudentId" Mode="In" Type="Int32" />
+            <Parameter Name="StudenName" Mode="In" Type="String" />
+            <Parameter Name="ProgramId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Delete_Account">
+          <Parameter Name="userid" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Insert_Account">
+            <Parameter Name="userid" Mode="In" Type="Guid" />
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Mobile" Mode="In" Type="String" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Update_Account">
+            <Parameter Name="userid" Mode="In" Type="Guid" />
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Mobile" Mode="In" Type="String" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Get_Account_all" ReturnType="Collection(Univercity02Model.SP_Get_Account_all_Result)" />
+        </EntityContainer>
+        <ComplexType Name="SP_CheckLogin_Result">
+          <Property Type="Guid" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PassWord" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Mobile" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="SP_Get_CertificateClass_Result">
+          <Property Type="Int64" Name="ClassId" Nullable="false" />
+          <Property Type="String" Name="ClassName" Nullable="true" MaxLength="50" />
+          <Property Type="Int64" Name="SubjectId" Nullable="true" />
+          <Property Type="String" Name="SubjectName" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="StartDate" Nullable="true" />
+          <Property Type="DateTime" Name="EndDate" Nullable="true" />
+          <Property Type="Int64" Name="ProfessorId" Nullable="true" />
+          <Property Type="String" Name="ProfessorName" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="SP_Get_Professor_Result">
+          <Property Type="Int64" Name="ProfessorId" Nullable="false" />
+          <Property Type="String" Name="ProfessorName" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="SP_Get_Professor_By_Id_Result">
+          <Property Type="Int64" Name="ProfessorId" Nullable="false" />
+          <Property Type="String" Name="ProfessorName" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="SP_Get_Student_Classes_all_Result">
+          <Property Type="Int64" Name="StudentId" Nullable="false" />
+          <Property Type="String" Name="StudenName" Nullable="true" MaxLength="50" />
+          <Property Type="Int64" Name="ClassId" Nullable="false" />
+          <Property Type="String" Name="ClassName" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="TestScore" Nullable="true" Precision="18" Scale="0" />
+        </ComplexType>
+        <ComplexType Name="SP_Get_Student_Classes_by_ClassId_Result">
+          <Property Type="Int64" Name="StudentId" Nullable="false" />
+          <Property Type="String" Name="StudenName" Nullable="true" MaxLength="50" />
+          <Property Type="Int64" Name="ClassId" Nullable="false" />
+          <Property Type="String" Name="ClassName" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="TestScore" Nullable="true" Precision="18" Scale="0" />
+        </ComplexType>
+        <ComplexType Name="SP_Get_Account_all_Result">
+          <Property Type="Guid" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PassWord" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Mobile" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="50" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Univercity02ModelStoreContainer" CdmEntityContainer="Univercity02Entities">
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="Univercity02Model.Account">
+              <MappingFragment StoreEntitySet="Accounts">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="PassWord" ColumnName="PassWord" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CertificateClasses">
+            <EntityTypeMapping TypeName="Univercity02Model.CertificateClass">
+              <MappingFragment StoreEntitySet="CertificateClass">
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="ProfessorId" ColumnName="ProfessorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DegreePrograms">
+            <EntityTypeMapping TypeName="Univercity02Model.DegreeProgram">
+              <MappingFragment StoreEntitySet="DegreeProgram">
+                <ScalarProperty Name="ProgramId" ColumnName="ProgramId" />
+                <ScalarProperty Name="ProgramName" ColumnName="ProgramName" />
+                <ScalarProperty Name="FacultyId" ColumnName="FacultyId" />
+                <ScalarProperty Name="ProfessorId" ColumnName="ProfessorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Faculties">
+            <EntityTypeMapping TypeName="Univercity02Model.Faculty">
+              <MappingFragment StoreEntitySet="Faculty">
+                <ScalarProperty Name="FacultyId" ColumnName="FacultyId" />
+                <ScalarProperty Name="FacultyName" ColumnName="FacultyName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Professors">
+            <EntityTypeMapping TypeName="Univercity02Model.Professor">
+              <MappingFragment StoreEntitySet="Professor">
+                <ScalarProperty Name="ProfessorId" ColumnName="ProfessorId" />
+                <ScalarProperty Name="ProfessorName" ColumnName="ProfessorName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="Univercity02Model.Student">
+              <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="StudenName" ColumnName="StudenName" />
+                <ScalarProperty Name="ProgramId" ColumnName="ProgramId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentClasses">
+            <EntityTypeMapping TypeName="Univercity02Model.StudentClass">
+              <MappingFragment StoreEntitySet="StudentClass">
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+                <ScalarProperty Name="TestScore" ColumnName="TestScore" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentTests">
+            <EntityTypeMapping TypeName="Univercity02Model.StudentTest">
+              <MappingFragment StoreEntitySet="StudentTest">
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+                <ScalarProperty Name="FirstScore" ColumnName="FirstScore" />
+                <ScalarProperty Name="SecondScore" ColumnName="SecondScore" />
+                <ScalarProperty Name="ThirdScore" ColumnName="ThirdScore" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subjects">
+            <EntityTypeMapping TypeName="Univercity02Model.Subject">
+              <MappingFragment StoreEntitySet="Subject">
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
+                <ScalarProperty Name="FacultyId" ColumnName="FacultyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="FacultyProfessor" TypeName="Univercity02Model.FacultyProfessor" StoreEntitySet="FacultyProfessor">
+            <EndProperty Name="Faculty">
+              <ScalarProperty Name="FacultyId" ColumnName="FacultyId" />
+            </EndProperty>
+            <EndProperty Name="Professor">
+              <ScalarProperty Name="ProfessorId" ColumnName="ProfessorId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="SP_CheckLogin" FunctionName="Univercity02Model.Store.SP_CheckLogin">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Univercity02Model.SP_CheckLogin_Result">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="PassWord" ColumnName="PassWord" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Delete_Student" FunctionName="Univercity02Model.Store.SP_Delete_Student" />
+          <FunctionImportMapping FunctionImportName="SP_Get_CertificateClass" FunctionName="Univercity02Model.Store.SP_Get_CertificateClass">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Univercity02Model.SP_Get_CertificateClass_Result">
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="ProfessorId" ColumnName="ProfessorId" />
+                <ScalarProperty Name="ProfessorName" ColumnName="ProfessorName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Get_Professor" FunctionName="Univercity02Model.Store.SP_Get_Professor">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Univercity02Model.SP_Get_Professor_Result">
+                <ScalarProperty Name="ProfessorId" ColumnName="ProfessorId" />
+                <ScalarProperty Name="ProfessorName" ColumnName="ProfessorName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Get_Professor_By_Id" FunctionName="Univercity02Model.Store.SP_Get_Professor_By_Id">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Univercity02Model.SP_Get_Professor_By_Id_Result">
+                <ScalarProperty Name="ProfessorId" ColumnName="ProfessorId" />
+                <ScalarProperty Name="ProfessorName" ColumnName="ProfessorName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Get_Student_Classes_all" FunctionName="Univercity02Model.Store.SP_Get_Student_Classes_all">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Univercity02Model.SP_Get_Student_Classes_all_Result">
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="StudenName" ColumnName="StudenName" />
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+                <ScalarProperty Name="TestScore" ColumnName="TestScore" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Get_Student_Classes_by_ClassId" FunctionName="Univercity02Model.Store.SP_Get_Student_Classes_by_ClassId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Univercity02Model.SP_Get_Student_Classes_by_ClassId_Result">
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="StudenName" ColumnName="StudenName" />
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+                <ScalarProperty Name="TestScore" ColumnName="TestScore" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Insert_Student" FunctionName="Univercity02Model.Store.SP_Insert_Student" />
+          <FunctionImportMapping FunctionImportName="SP_Update_Student" FunctionName="Univercity02Model.Store.SP_Update_Student" />
+          <FunctionImportMapping FunctionImportName="SP_Delete_Account" FunctionName="Univercity02Model.Store.SP_Delete_Account" />
+          <FunctionImportMapping FunctionImportName="SP_Insert_Account" FunctionName="Univercity02Model.Store.SP_Insert_Account" />
+          <FunctionImportMapping FunctionImportName="SP_Update_Account" FunctionName="Univercity02Model.Store.SP_Update_Account" />
+          <FunctionImportMapping FunctionImportName="SP_Get_Account_all" FunctionName="Univercity02Model.Store.SP_Get_Account_all">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Univercity02Model.SP_Get_Account_all_Result">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="PassWord" ColumnName="PassWord" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

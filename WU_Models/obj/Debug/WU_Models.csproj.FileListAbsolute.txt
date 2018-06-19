@@ -1,0 +1,14 @@
+C:\Users\asc\Source\Repos\WebUnivercity\WU_Models\bin\Debug\WU_Models.dll.config
+C:\Users\asc\Source\Repos\WebUnivercity\WU_Models\bin\Debug\WU_Models.dll
+C:\Users\asc\Source\Repos\WebUnivercity\WU_Models\bin\Debug\WU_Models.pdb
+C:\Users\asc\Source\Repos\WebUnivercity\WU_Models\bin\Debug\EntityFramework.dll
+C:\Users\asc\Source\Repos\WebUnivercity\WU_Models\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\asc\Source\Repos\WebUnivercity\WU_Models\bin\Debug\WU_ValueObjects.dll
+C:\Users\asc\Source\Repos\WebUnivercity\WU_Models\bin\Debug\WU_ValueObjects.pdb
+C:\Users\asc\Source\Repos\WebUnivercity\WU_Models\bin\Debug\EntityFramework.xml
+C:\Users\asc\Source\Repos\WebUnivercity\WU_Models\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\asc\Source\Repos\WebUnivercity\WU_Models\obj\Debug\WU_Models.csprojAssemblyReference.cache
+C:\Users\asc\Source\Repos\WebUnivercity\WU_Models\obj\Debug\WU_Models.csproj.CoreCompileInputs.cache
+C:\Users\asc\Source\Repos\WebUnivercity\WU_Models\obj\Debug\WU_Models.csproj.CopyComplete
+C:\Users\asc\Source\Repos\WebUnivercity\WU_Models\obj\Debug\WU_Models.dll
+C:\Users\asc\Source\Repos\WebUnivercity\WU_Models\obj\Debug\WU_Models.pdb

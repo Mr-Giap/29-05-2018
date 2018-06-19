@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Univercity02ModelStoreContainer" CdmEntityContainer="Univercity02Entities">
+    <EntitySetMapping Name="Accounts">
+      <EntityTypeMapping TypeName="Univercity02Model.Account">
+        <MappingFragment StoreEntitySet="Accounts">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="PassWord" ColumnName="PassWord" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CertificateClasses">
+      <EntityTypeMapping TypeName="Univercity02Model.CertificateClass">
+        <MappingFragment StoreEntitySet="CertificateClass">
+          <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+          <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+          <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="ProfessorId" ColumnName="ProfessorId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DegreePrograms">
+      <EntityTypeMapping TypeName="Univercity02Model.DegreeProgram">
+        <MappingFragment StoreEntitySet="DegreeProgram">
+          <ScalarProperty Name="ProgramId" ColumnName="ProgramId" />
+          <ScalarProperty Name="ProgramName" ColumnName="ProgramName" />
+          <ScalarProperty Name="FacultyId" ColumnName="FacultyId" />
+          <ScalarProperty Name="ProfessorId" ColumnName="ProfessorId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Faculties">
+      <EntityTypeMapping TypeName="Univercity02Model.Faculty">
+        <MappingFragment StoreEntitySet="Faculty">
+          <ScalarProperty Name="FacultyId" ColumnName="FacultyId" />
+          <ScalarProperty Name="FacultyName" ColumnName="FacultyName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Professors">
+      <EntityTypeMapping TypeName="Univercity02Model.Professor">
+        <MappingFragment StoreEntitySet="Professor">
+          <ScalarProperty Name="ProfessorId" ColumnName="ProfessorId" />
+          <ScalarProperty Name="ProfessorName" ColumnName="ProfessorName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Students">
+      <EntityTypeMapping TypeName="Univercity02Model.Student">
+        <MappingFragment StoreEntitySet="Student">
+          <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+          <ScalarProperty Name="StudenName" ColumnName="StudenName" />
+          <ScalarProperty Name="ProgramId" ColumnName="ProgramId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StudentClasses">
+      <EntityTypeMapping TypeName="Univercity02Model.StudentClass">
+        <MappingFragment StoreEntitySet="StudentClass">
+          <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+          <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+          <ScalarProperty Name="TestScore" ColumnName="TestScore" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StudentTests">
+      <EntityTypeMapping TypeName="Univercity02Model.StudentTest">
+        <MappingFragment StoreEntitySet="StudentTest">
+          <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+          <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+          <ScalarProperty Name="FirstScore" ColumnName="FirstScore" />
+          <ScalarProperty Name="SecondScore" ColumnName="SecondScore" />
+          <ScalarProperty Name="ThirdScore" ColumnName="ThirdScore" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Subjects">
+      <EntityTypeMapping TypeName="Univercity02Model.Subject">
+        <MappingFragment StoreEntitySet="Subject">
+          <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+          <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
+          <ScalarProperty Name="FacultyId" ColumnName="FacultyId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="FacultyProfessor" TypeName="Univercity02Model.FacultyProfessor" StoreEntitySet="FacultyProfessor">
+      <EndProperty Name="Faculty">
+        <ScalarProperty Name="FacultyId" ColumnName="FacultyId" />
+      </EndProperty>
+      <EndProperty Name="Professor">
+        <ScalarProperty Name="ProfessorId" ColumnName="ProfessorId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <FunctionImportMapping FunctionImportName="SP_CheckLogin" FunctionName="Univercity02Model.Store.SP_CheckLogin">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Univercity02Model.SP_CheckLogin_Result">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="PassWord" ColumnName="PassWord" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_Delete_Student" FunctionName="Univercity02Model.Store.SP_Delete_Student" />
+    <FunctionImportMapping FunctionImportName="SP_Get_CertificateClass" FunctionName="Univercity02Model.Store.SP_Get_CertificateClass">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Univercity02Model.SP_Get_CertificateClass_Result">
+          <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+          <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+          <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+          <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="ProfessorId" ColumnName="ProfessorId" />
+          <ScalarProperty Name="ProfessorName" ColumnName="ProfessorName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_Get_Professor" FunctionName="Univercity02Model.Store.SP_Get_Professor">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Univercity02Model.SP_Get_Professor_Result">
+          <ScalarProperty Name="ProfessorId" ColumnName="ProfessorId" />
+          <ScalarProperty Name="ProfessorName" ColumnName="ProfessorName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_Get_Professor_By_Id" FunctionName="Univercity02Model.Store.SP_Get_Professor_By_Id">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Univercity02Model.SP_Get_Professor_By_Id_Result">
+          <ScalarProperty Name="ProfessorId" ColumnName="ProfessorId" />
+          <ScalarProperty Name="ProfessorName" ColumnName="ProfessorName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_Get_Student_Classes_all" FunctionName="Univercity02Model.Store.SP_Get_Student_Classes_all">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Univercity02Model.SP_Get_Student_Classes_all_Result">
+          <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+          <ScalarProperty Name="StudenName" ColumnName="StudenName" />
+          <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+          <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+          <ScalarProperty Name="TestScore" ColumnName="TestScore" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_Get_Student_Classes_by_ClassId" FunctionName="Univercity02Model.Store.SP_Get_Student_Classes_by_ClassId">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Univercity02Model.SP_Get_Student_Classes_by_ClassId_Result">
+          <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+          <ScalarProperty Name="StudenName" ColumnName="StudenName" />
+          <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+          <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+          <ScalarProperty Name="TestScore" ColumnName="TestScore" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_Insert_Student" FunctionName="Univercity02Model.Store.SP_Insert_Student" />
+    <FunctionImportMapping FunctionImportName="SP_Update_Student" FunctionName="Univercity02Model.Store.SP_Update_Student" />
+    <FunctionImportMapping FunctionImportName="SP_Delete_Account" FunctionName="Univercity02Model.Store.SP_Delete_Account" />
+    <FunctionImportMapping FunctionImportName="SP_Insert_Account" FunctionName="Univercity02Model.Store.SP_Insert_Account" />
+    <FunctionImportMapping FunctionImportName="SP_Update_Account" FunctionName="Univercity02Model.Store.SP_Update_Account" />
+    <FunctionImportMapping FunctionImportName="SP_Get_Account_all" FunctionName="Univercity02Model.Store.SP_Get_Account_all">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Univercity02Model.SP_Get_Account_all_Result">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="PassWord" ColumnName="PassWord" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>
