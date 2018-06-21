@@ -1,4 +1,4 @@
-﻿
+﻿@model WU_ValueObjects.vAccount
 @{
     ViewBag.Title = "Register";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -28,26 +28,41 @@
 <div class="hold-transition register-page">
     <div class="register-box">
         <div class="register-logo">
-            <a href="../../index2.html"><b>Admin</b>LTE</a>
+            <a href="@Url.Action("Register","Login")"><b>Admin</b>LTE</a>
         </div>
         <div class="register-box-body">
             <p class="login-box-msg">Register a new membership</p>
-            <form action="../../index.html" method="post">
+            @using (Html.BeginForm("Register", "Login", FormMethod.Post))
+            {
                 <div class="form-group has-feedback">
-                    <input type="text" class="form-control" placeholder="Full name">
-                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
-                </div>
-                <div class="form-group has-feedback">
-                    <input type="email" class="form-control" placeholder="Email">
+                    @Html.TextBoxFor(x => x.Email,new { @class = "form-control", placeholder = "Email" })
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-group has-feedback">
-                    <input type="password" class="form-control" placeholder="Password">
+                    @Html.TextBoxFor(x => x.Mobile, new { @class = "form-control", placeholder = "Mobile" })
+                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                    @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group has-feedback">
+                    @Html.TextBoxFor(x=>x.Description, new { @class="form-control", placeholder="Description" })
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-group has-feedback">
-                    <input type="password" class="form-control" placeholder="Retype password">
+                    @Html.TextBoxFor(x => x.UserName, new { @class = "form-control", placeholder = "User name" })
+                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group has-feedback">
+                    @Html.TextBoxFor(x => x.PassWord, new { @class = "form-control", placeholder = "password", type = "password" })
                     <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+                    @Html.ValidationMessageFor(model => model.PassWord, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group has-feedback">
+                    @Html.TextBoxFor(x => x.RetypePassword, new { @class = "form-control", placeholder = "Retype password", type = "password" })
+                    <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+                    @Html.ValidationMessageFor(model => model.RetypePassword, "", new { @class = "text-danger" })
                 </div>
                 <div class="row">
                     <div class="col-xs-12">
@@ -55,7 +70,7 @@
                     </div>
                     <!-- /.col -->
                 </div>
-            </form>
+            }
             @*<div class="social-auth-links text-center">
                     <p>- OR -</p>
                     <a href="#" class="btn btn-block btn-social btn-facebook btn-flat">

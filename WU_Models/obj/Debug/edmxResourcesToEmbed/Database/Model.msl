@@ -97,6 +97,30 @@
         <ScalarProperty Name="ProfessorId" ColumnName="ProfessorId" />
       </EndProperty>
     </AssociationSetMapping>
+    <FunctionImportMapping FunctionImportName="SP_CertificateClass_Get_all" FunctionName="Univercity02Model.Store.SP_CertificateClass_Get_all">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Univercity02Model.SP_CertificateClass_Get_all_Result">
+          <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+          <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+          <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="ProfessorId" ColumnName="ProfessorId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_CertificateClass_Get_By_Id" FunctionName="Univercity02Model.Store.SP_CertificateClass_Get_By_Id">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Univercity02Model.SP_CertificateClass_Get_By_Id_Result">
+          <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+          <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+          <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="ProfessorName" ColumnName="ProfessorName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="SP_CheckLogin" FunctionName="Univercity02Model.Store.SP_CheckLogin">
       <ResultMapping>
         <ComplexTypeMapping TypeName="Univercity02Model.SP_CheckLogin_Result">
@@ -109,7 +133,20 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_Delete_Account" FunctionName="Univercity02Model.Store.SP_Delete_Account" />
     <FunctionImportMapping FunctionImportName="SP_Delete_Student" FunctionName="Univercity02Model.Store.SP_Delete_Student" />
+    <FunctionImportMapping FunctionImportName="SP_Get_Account_all" FunctionName="Univercity02Model.Store.SP_Get_Account_all">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Univercity02Model.SP_Get_Account_all_Result">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="PassWord" ColumnName="PassWord" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="SP_Get_CertificateClass" FunctionName="Univercity02Model.Store.SP_Get_CertificateClass">
       <ResultMapping>
         <ComplexTypeMapping TypeName="Univercity02Model.SP_Get_CertificateClass_Result">
@@ -162,22 +199,9 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="SP_Insert_Student" FunctionName="Univercity02Model.Store.SP_Insert_Student" />
-    <FunctionImportMapping FunctionImportName="SP_Update_Student" FunctionName="Univercity02Model.Store.SP_Update_Student" />
-    <FunctionImportMapping FunctionImportName="SP_Delete_Account" FunctionName="Univercity02Model.Store.SP_Delete_Account" />
     <FunctionImportMapping FunctionImportName="SP_Insert_Account" FunctionName="Univercity02Model.Store.SP_Insert_Account" />
+    <FunctionImportMapping FunctionImportName="SP_Insert_Student" FunctionName="Univercity02Model.Store.SP_Insert_Student" />
     <FunctionImportMapping FunctionImportName="SP_Update_Account" FunctionName="Univercity02Model.Store.SP_Update_Account" />
-    <FunctionImportMapping FunctionImportName="SP_Get_Account_all" FunctionName="Univercity02Model.Store.SP_Get_Account_all">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="Univercity02Model.SP_Get_Account_all_Result">
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="UserName" ColumnName="UserName" />
-          <ScalarProperty Name="PassWord" ColumnName="PassWord" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_Update_Student" FunctionName="Univercity02Model.Store.SP_Update_Student" />
   </EntityContainerMapping>
 </Mapping>

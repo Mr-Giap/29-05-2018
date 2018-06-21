@@ -1,0 +1,186 @@
+﻿@model WU_ValueObjects.vAccount
+
+@{
+    ViewBag.Title = "Tài khoản";
+    Layout = "~/Areas/AdminCP/Views/Shared/_LayoutAdmin.cshtml";
+    var listuser = ViewBag.listuser;
+}
+
+<div id="manage-tech-article" class="col-xs-12">
+    <div class="portlet box red-intense">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-globe"></i>Quản lý người dùng
+            </div>
+            <div class="tools">
+            </div>
+        </div>
+
+        <div class="portlet-body">
+            <div class="col-xs-12" style="background:#FFF;float:none ">
+
+                <div class="col-xs-12" style="float:none">
+                    <div style="padding-bottom:10px;">
+                        <a class="btn btn-primary btn-sm" style="margin-top:10px;" data-toggle="modal" data-target="#InsertUModal">
+                            Thêm mới
+                            <span class="fa fa-plus" style="padding-left:6px;"></span>
+                        </a>
+                    </div>
+                    <div id="InsertUModal" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Thêm mới tài khoản</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="hold-transition register-page">
+                                        <p class="text-danger" id="error"></p>
+                                        <div class="register-box-body">
+                                            @using (Html.BeginForm("Create", "Account", FormMethod.Post))
+                                            {
+                                                <div class="form-group has-feedback">
+                                                    @Html.TextBoxFor(x => x.Email, new { @class = "form-control", placeholder = "Email", required = "required" })
+                                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="form-group has-feedback">
+                                                    @Html.TextBoxFor(x => x.Mobile, new { @class = "form-control", placeholder = "Mobile", required = "required" })
+                                                    @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="form-group has-feedback">
+                                                    @Html.TextBoxFor(x => x.Description, new { @class = "form-control", placeholder = "Description" })
+                                                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="form-group has-feedback">
+                                                    @Html.TextBoxFor(x => x.UserName, new { @class = "form-control", placeholder = "User name", required = "required" })
+                                                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="form-group has-feedback">
+                                                    @Html.TextBoxFor(x => x.PassWord, new { @class = "form-control", placeholder = "password", type = "password", required = "required" })
+                                                    @Html.ValidationMessageFor(model => model.PassWord, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="form-group has-feedback">
+                                                    @Html.TextBoxFor(x => x.RetypePassword, new { @class = "form-control", placeholder = "Retype password", type = "password", required = "required" })
+                                                    @Html.ValidationMessageFor(model => model.RetypePassword, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xs-12">
+                                                        <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
+                                                    </div>
+                                                    <!-- /.col -->
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12" style="padding-bottom:20px;padding-left:0px">
+                    </div>
+                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                    <table class="table table-striped table-bordered table-hover dataTable no-footer" id="tech-article-table" aria-describedby="dataTables-example_info">
+                        @*<input type="text" id="Seach_text" style="width:400px" value="@ViewBag.Name" />*@
+                        <thead>
+                            <tr role="row">
+                                <th class="sorting" tabindex="0" aria-controls="tech-article-table" rowspan="1" colspan="1">Tài khoản</th>
+                                <th class="sorting" tabindex="0" aria-controls="tech-article-table" rowspan="1" colspan="1">Email</th>
+                                <th class="sorting" tabindex="0" aria-controls="tech-article-table" rowspan="1" colspan="1">Mobile</th>
+                                <th class="sorting" tabindex="0" aria-controls="tech-article-table" rowspan="1" colspan="1">Miêu tả</th>
+                                <th class="sorting" tabindex="0" aria-controls="tech-article-table" rowspan="1" colspan="1">Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in listuser)
+                            {
+                                <tr>
+                                    <td>@item.UserName</td>
+                                    <td>@item.Email</td>
+                                    <td>@item.Mobile</td>
+                                    <td class="center">
+                                        @item.Description
+                                    </td>
+                                    <td>
+                                        <a href="@Url.Action("Edit", "Account", new { id = item.UserId })" class="btn btn-info"})>Sửa</a>
+                                        <a class="btn btn-danger" onclick="Remove('@item.UserId', '@item.UserName', this) ">Xóa</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <ul id="pagination" class="pagination"></ul>
+                <div class="pagination-holder clearfix" style="margin-top:10px">
+                    <div id="light-pagination" class="pagination"></div>
+                    <a data-minh="/anh1.jpg"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript" src="~/Areas/AdminCP/Content/assets/global/plugins/select2/select2.min.js"></script>
+    <script type="text/javascript" src="~/Areas/AdminCP/Content/assets/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="~/Areas/AdminCP/Content/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+    <script src="~/Areas/AdminCP/Content/assets/global/plugins/bootbox/bootbox.min.js"></script>
+    <script src="~/areas/admincp/content/assets/global/scripts/jquery.simplepagination.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            $('#tech-article-table').DataTable({
+                "order": [[4, "asc"]],
+                "pageLength": 2
+            });
+        });
+        function checkvalidate() {
+            var inpEmail = document.getElementById("Email");
+            var inpphone = document.getElementById("Mobile");
+            var inpder = document.getElementById("Description");
+            var inpuname = document.getElementById("UserName");
+            var inppas = document.getElementById("PassWord");
+            var inprepas = document.getElementById("RetypePassword");
+            if (!inpEmail.checkValidity()) {
+                document.getElementById("error").innerHTML = inpObj.validationMessage;
+            }
+            else if (!inpphone.checkValidity()) {
+                document.getElementById("error").innerHTML = inpObj.validationMessage;
+            }
+            else if (!inpder.checkValidity()) {
+                document.getElementById("error").innerHTML = inpObj.validationMessage;
+            }
+            else if (!inpuname.checkValidity()) {
+                document.getElementById("error").innerHTML = inpObj.validationMessage;
+            }
+            else if (!inppas.checkValidity()) {
+                document.getElementById("error").innerHTML = inpObj.validationMessage;
+            }
+            else if (!inprepas.checkValidity()) {
+                document.getElementById("error").innerHTML = inpObj.validationMessage;
+            }
+        }
+
+        function Remove(id, name, event) {
+            var sender = event.currentTarget;
+            var answer = confirm("Bạn muốn xóa người dùng này: " + name + " ?");
+            if (answer) {
+                $.ajax({
+                    url: '@Url.Action("Delete", "Account")',
+                    data: { id: id },
+                    type: "post",
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.rs == 'ok') {
+                            $(event).closest("tr").remove();
+                        }
+                    }
+                });
+            }
+        }
+    </script>
+}

@@ -37,6 +37,20 @@ namespace WU_Models.Database
         public virtual DbSet<StudentTest> StudentTests { get; set; }
         public virtual DbSet<Subject> Subjects { get; set; }
     
+        public virtual ObjectResult<SP_CertificateClass_Get_all_Result> SP_CertificateClass_Get_all()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_CertificateClass_Get_all_Result>("SP_CertificateClass_Get_all");
+        }
+    
+        public virtual ObjectResult<SP_CertificateClass_Get_By_Id_Result> SP_CertificateClass_Get_By_Id(Nullable<long> classid)
+        {
+            var classidParameter = classid.HasValue ?
+                new ObjectParameter("classid", classid) :
+                new ObjectParameter("classid", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_CertificateClass_Get_By_Id_Result>("SP_CertificateClass_Get_By_Id", classidParameter);
+        }
+    
         public virtual ObjectResult<SP_CheckLogin_Result> SP_CheckLogin(string userName, string passWord)
         {
             var userNameParameter = userName != null ?
@@ -50,6 +64,15 @@ namespace WU_Models.Database
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_CheckLogin_Result>("SP_CheckLogin", userNameParameter, passWordParameter);
         }
     
+        public virtual int SP_Delete_Account(Nullable<System.Guid> userid)
+        {
+            var useridParameter = userid.HasValue ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Delete_Account", useridParameter);
+        }
+    
         public virtual int SP_Delete_Student(Nullable<int> studentId)
         {
             var studentIdParameter = studentId.HasValue ?
@@ -57,6 +80,11 @@ namespace WU_Models.Database
                 new ObjectParameter("StudentId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Delete_Student", studentIdParameter);
+        }
+    
+        public virtual ObjectResult<SP_Get_Account_all_Result> SP_Get_Account_all()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Get_Account_all_Result>("SP_Get_Account_all");
         }
     
         public virtual ObjectResult<SP_Get_CertificateClass_Result> SP_Get_CertificateClass()
@@ -92,49 +120,6 @@ namespace WU_Models.Database
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Get_Student_Classes_by_ClassId_Result>("SP_Get_Student_Classes_by_ClassId", classIdParameter);
         }
     
-        public virtual int SP_Insert_Student(Nullable<int> studentId, string studenName, Nullable<int> programId)
-        {
-            var studentIdParameter = studentId.HasValue ?
-                new ObjectParameter("StudentId", studentId) :
-                new ObjectParameter("StudentId", typeof(int));
-    
-            var studenNameParameter = studenName != null ?
-                new ObjectParameter("StudenName", studenName) :
-                new ObjectParameter("StudenName", typeof(string));
-    
-            var programIdParameter = programId.HasValue ?
-                new ObjectParameter("ProgramId", programId) :
-                new ObjectParameter("ProgramId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Insert_Student", studentIdParameter, studenNameParameter, programIdParameter);
-        }
-    
-        public virtual int SP_Update_Student(Nullable<int> studentId, string studenName, Nullable<int> programId)
-        {
-            var studentIdParameter = studentId.HasValue ?
-                new ObjectParameter("StudentId", studentId) :
-                new ObjectParameter("StudentId", typeof(int));
-    
-            var studenNameParameter = studenName != null ?
-                new ObjectParameter("StudenName", studenName) :
-                new ObjectParameter("StudenName", typeof(string));
-    
-            var programIdParameter = programId.HasValue ?
-                new ObjectParameter("ProgramId", programId) :
-                new ObjectParameter("ProgramId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Update_Student", studentIdParameter, studenNameParameter, programIdParameter);
-        }
-    
-        public virtual int SP_Delete_Account(Nullable<System.Guid> userid)
-        {
-            var useridParameter = userid.HasValue ?
-                new ObjectParameter("userid", userid) :
-                new ObjectParameter("userid", typeof(System.Guid));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Delete_Account", useridParameter);
-        }
-    
         public virtual int SP_Insert_Account(Nullable<System.Guid> userid, string username, string password, string email, string mobile, string description)
         {
             var useridParameter = userid.HasValue ?
@@ -162,6 +147,23 @@ namespace WU_Models.Database
                 new ObjectParameter("Description", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Insert_Account", useridParameter, usernameParameter, passwordParameter, emailParameter, mobileParameter, descriptionParameter);
+        }
+    
+        public virtual int SP_Insert_Student(Nullable<int> studentId, string studenName, Nullable<int> programId)
+        {
+            var studentIdParameter = studentId.HasValue ?
+                new ObjectParameter("StudentId", studentId) :
+                new ObjectParameter("StudentId", typeof(int));
+    
+            var studenNameParameter = studenName != null ?
+                new ObjectParameter("StudenName", studenName) :
+                new ObjectParameter("StudenName", typeof(string));
+    
+            var programIdParameter = programId.HasValue ?
+                new ObjectParameter("ProgramId", programId) :
+                new ObjectParameter("ProgramId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Insert_Student", studentIdParameter, studenNameParameter, programIdParameter);
         }
     
         public virtual int SP_Update_Account(Nullable<System.Guid> userid, string username, string password, string email, string mobile, string description)
@@ -193,9 +195,21 @@ namespace WU_Models.Database
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Update_Account", useridParameter, usernameParameter, passwordParameter, emailParameter, mobileParameter, descriptionParameter);
         }
     
-        public virtual ObjectResult<SP_Get_Account_all_Result> SP_Get_Account_all()
+        public virtual int SP_Update_Student(Nullable<int> studentId, string studenName, Nullable<int> programId)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Get_Account_all_Result>("SP_Get_Account_all");
+            var studentIdParameter = studentId.HasValue ?
+                new ObjectParameter("StudentId", studentId) :
+                new ObjectParameter("StudentId", typeof(int));
+    
+            var studenNameParameter = studenName != null ?
+                new ObjectParameter("StudenName", studenName) :
+                new ObjectParameter("StudenName", typeof(string));
+    
+            var programIdParameter = programId.HasValue ?
+                new ObjectParameter("ProgramId", programId) :
+                new ObjectParameter("ProgramId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Update_Student", studentIdParameter, studenNameParameter, programIdParameter);
         }
     }
 }

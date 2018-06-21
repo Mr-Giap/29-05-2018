@@ -12,3 +12,15 @@ C:\Users\asc\Source\Repos\WebUnivercity\WU_Models\obj\Debug\WU_Models.csproj.Cor
 C:\Users\asc\Source\Repos\WebUnivercity\WU_Models\obj\Debug\WU_Models.csproj.CopyComplete
 C:\Users\asc\Source\Repos\WebUnivercity\WU_Models\obj\Debug\WU_Models.dll
 C:\Users\asc\Source\Repos\WebUnivercity\WU_Models\obj\Debug\WU_Models.pdb
+A:\Git\WebUnivercity\WU_Models\bin\Debug\WU_Models.dll.config
+A:\Git\WebUnivercity\WU_Models\bin\Debug\WU_Models.dll
+A:\Git\WebUnivercity\WU_Models\bin\Debug\WU_Models.pdb
+A:\Git\WebUnivercity\WU_Models\bin\Debug\EntityFramework.dll
+A:\Git\WebUnivercity\WU_Models\bin\Debug\EntityFramework.SqlServer.dll
+A:\Git\WebUnivercity\WU_Models\bin\Debug\WU_ValueObjects.dll
+A:\Git\WebUnivercity\WU_Models\bin\Debug\WU_ValueObjects.pdb
+A:\Git\WebUnivercity\WU_Models\bin\Debug\EntityFramework.xml
+A:\Git\WebUnivercity\WU_Models\bin\Debug\EntityFramework.SqlServer.xml
+A:\Git\WebUnivercity\WU_Models\obj\Debug\WU_Models.csprojResolveAssemblyReference.cache
+A:\Git\WebUnivercity\WU_Models\obj\Debug\WU_Models.dll
+A:\Git\WebUnivercity\WU_Models\obj\Debug\WU_Models.pdb

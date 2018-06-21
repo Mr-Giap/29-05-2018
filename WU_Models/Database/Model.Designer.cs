@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\asc\Source\Repos\WebUnivercity\WU_Models\Database\Model.edmx'. 
+﻿// T4 code generation is enabled for model 'A:\Git\WebUnivercity\WU_Models\Database\Model.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
