@@ -1,0 +1,162 @@
+﻿
+@{
+    ViewBag.Title = "InsertMulti";
+    Layout = "~/Areas/AdminCP/Views/Shared/_LayoutAdmin.cshtml";
+}
+@*<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">*@
+<style>
+    .portlet.box .portlet-body {
+        padding: 38px;
+    }
+
+    .portlet.box.purple-studio {
+        width: 1291px;
+    }
+
+    input.txtUserName {
+        height: 31px;
+    }
+
+    input.txtEmail {
+        height: 31px;
+    }
+
+    input.txtMobile {
+        height: 31px;
+    }
+
+    input.txtDescription {
+        height: 31px;
+    }
+</style>
+
+<div class="portlet box red-intense">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-globe"></i>Thêm mới nhiều tài khoản
+        </div>
+        <div class="tools">
+
+        </div>
+    </div>
+
+    <div class="portlet-body">
+        <div style="width:100%">
+            @using (Html.BeginForm("InsertMulti", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+
+
+                <table class="table tblChiTietThongTinNhap">
+                    <tr class="trAppend" style="display:none;">
+                        <td>
+                            <input name="" class="txtUserName" value="" placeholder="Nhập tên tài khoản" />
+                        </td>
+                        <td>
+                            <input name="" class="txtPassword" value="" placeholder="Nhập Mật khẩu" />
+                        </td>
+                        <td>
+                            <input name="" class="txtEmail" value="" placeholder="Nhập Email" />
+                        </td>
+                        <td>
+                            <input name="" class="txtMobile" value="" placeholder="Nhập số điện thoại" />
+                        </td>
+                        <td>
+                            <input name="" class="txtDescription" value="" placeholder="Nhập mô tả" />
+                        </td>
+                        <td>
+                            <input class="btnDelete btn btn-danger" style="width:30px;height:30px" value="Xóa" />
+                        </td>
+                    </tr>
+                    <tr class="trFirstChild" data-id="-1">
+                        <td>Tên tài khoản</td>
+                        <td>Mật khẩu</td>
+                        <td>Email</td>
+                        <td>Điện thoại</td>
+                        <td>Mô tả</td>
+                    </tr>
+
+                </table>
+                <input type="button" value="+" class="btn btn-success" id="btnAdd" />
+                <input type="submit" value="Thêm mới" class="btn btn-primary" id="btnNhapThongTin" />
+
+                <a href="@Url.Action("Index", "Home")" class="btn btn-default" style="width:300px;">Trở về trang chủ</a>
+            }
+        </div>
+        <!-- /.modal-content -->
+    </div>
+</div>
+
+
+
+@section Scripts{
+    @*<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>*@
+
+    <script>
+        $("#btnAdd").click(function () {
+            // Lấy id của tr cuối cùng thuộc thẻ table có class = tblChiTietPhieuNhap
+            //Bước 4: Phương thức find là tìm đến thẻ nào đó: ở đây là thẻ tr (:last-child) là thẻ tr cuối cùng trong thẻ tblChiTietPhieuNhap
+            var id_cuoi = $(".tblChiTietThongTinNhap").find("tr:last-child").attr("data-id");
+            i = parseInt(id_cuoi) + 1;
+            //Bước 1: Nội dung phía trong thẻ trAppend
+            var tdnoidung = $(".trAppend").html();
+            //Bước 2:Tạo 1 thẻ tr bao ngoài nội dung
+            var trnoidung = "<tr class=\"trAppended\" data-id=\"" + i + "\">" + tdnoidung + "</tr>";
+            ////Bước 3: Lấy thẻ table append vào 1 tr
+            $(".tblChiTietThongTinNhap").append(trnoidung);
+            loadIDLENTHE();
+
+        });
+
+        //Phương thức xử lý lấy thuộc tính attr từ thẻ tr gán xuống chỉ số phần tử các trong thuộc tính name của thẻ input
+        function loadIDLENTHE() {
+            $(".trAppended").each(function () {
+                //Lấy thuộc tính data-id của thẻ tr hiện
+                var id = $(this).attr("data-id");
+                var nameUserName = "[" + id + "].UserName";
+                var namePassword = "[" + id + "].PassWord";
+                var nameEmail = "[" + id + "].Email";
+                var nameMobile = "[" + id + "].Mobile";
+                var nameDescription = "[" + id + "].Description";
+                $(this).find(".txtUserName").attr("name", nameUserName);
+                $(this).find(".txtPassword").attr("name", namePassword);
+                $(this).find(".txtEmail").attr("name", nameEmail);
+                $(this).find(".txtMobile").attr("name", nameMobile);
+                $(this).find(".txtDescription").attr("name", nameDescription);
+            })
+        };
+
+        function CapNhapID() {   //Lấy lại tr 1
+            var id_cuoi = $(".tblChiTietThongTinNhap").find(".trFirstChild").attr("data-id");
+            i = parseInt(id_cuoi) + 1;
+
+            $(".trAppended").each(function () {
+                var id = i;
+                $(this).attr("data-id", i);
+                //Cập nhật lại id khi xóa
+                var id = $(this).attr("data-id");
+                var nameUserName = "[" + id + "].UserName";
+                var namePassword = "[" + id + "].PassWord";
+                var nameEmail = "[" + id + "].Email";
+                var nameMobile = "[" + id + "].Mobile";
+                var nameDescription = "[" + id + "].Description";
+                $(this).find(".txtUserName").attr("name", nameUserName);
+                $(this).find(".txtPassword").attr("name", namePassword);
+                $(this).find(".txtEmail").attr("name", nameEmail);
+                $(this).find(".txtMobile").attr("name", nameMobile);
+                $(this).find(".txtDescription").attr("name", nameDescription);
+                i++;
+            })
+        }
+
+        //Xử lý sự kiện xóa
+        $("body").delegate(".btnDelete", "click", function () {
+            //Xóa phần tử cha phía ngoài
+            $(this).closest("tr").remove();
+            CapNhapID();
+
+        });
+    </script>
+}
+
+

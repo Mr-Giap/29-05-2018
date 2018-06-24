@@ -15,5 +15,6 @@ namespace WU_Models.BaseModel
         public virtual bool InsertUser(T user) { return false; }
         public virtual bool UpdateUser(T user) { return false; }
         public virtual bool DeleteUser(T user) { return false; }
+        public virtual List<T> Getbypaging(int pageindex, int pagesize) { List<T> list = new List<T>(); return list; }
     }
 }

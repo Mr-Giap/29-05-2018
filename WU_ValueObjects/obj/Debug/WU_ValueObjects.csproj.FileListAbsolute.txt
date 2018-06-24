@@ -8,3 +8,9 @@ A:\Git\WebUnivercity\WU_ValueObjects\bin\Debug\WU_ValueObjects.pdb
 A:\Git\WebUnivercity\WU_ValueObjects\obj\Debug\WU_ValueObjects.csprojResolveAssemblyReference.cache
 A:\Git\WebUnivercity\WU_ValueObjects\obj\Debug\WU_ValueObjects.dll
 A:\Git\WebUnivercity\WU_ValueObjects\obj\Debug\WU_ValueObjects.pdb
+C:\Users\asc\Documents\git\WebUnivercity\WU_ValueObjects\bin\Debug\WU_ValueObjects.dll
+C:\Users\asc\Documents\git\WebUnivercity\WU_ValueObjects\bin\Debug\WU_ValueObjects.pdb
+C:\Users\asc\Documents\git\WebUnivercity\WU_ValueObjects\obj\Debug\WU_ValueObjects.csprojAssemblyReference.cache
+C:\Users\asc\Documents\git\WebUnivercity\WU_ValueObjects\obj\Debug\WU_ValueObjects.csproj.CoreCompileInputs.cache
+C:\Users\asc\Documents\git\WebUnivercity\WU_ValueObjects\obj\Debug\WU_ValueObjects.dll
+C:\Users\asc\Documents\git\WebUnivercity\WU_ValueObjects\obj\Debug\WU_ValueObjects.pdb

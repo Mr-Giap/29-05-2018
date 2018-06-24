@@ -1,9 +1,8 @@
-﻿@model WU_ValueObjects.vAccount
+﻿@model IEnumerable<WU_ValueObjects.vAccount>
 
 @{
     ViewBag.Title = "Tài khoản";
     Layout = "~/Areas/AdminCP/Views/Shared/_LayoutAdmin.cshtml";
-    var listuser = ViewBag.listuser;
 }
 
 <div id="manage-tech-article" class="col-xs-12">
@@ -21,12 +20,12 @@
 
                 <div class="col-xs-12" style="float:none">
                     <div style="padding-bottom:10px;">
-                        <a class="btn btn-primary btn-sm" style="margin-top:10px;" data-toggle="modal" data-target="#InsertUModal">
+                        <a class="btn btn-primary btn-sm" style="margin-top:10px;" href="@Url.Action("Create")" @*data-toggle="modal" data-target="#InsertUModal"*@>
                             Thêm mới
                             <span class="fa fa-plus" style="padding-left:6px;"></span>
                         </a>
                     </div>
-                    <div id="InsertUModal" class="modal fade" role="dialog">
+                    @*<div id="InsertUModal" class="modal fade" role="dialog">
                         <div class="modal-dialog">
                             <!-- Modal content-->
                             <div class="modal-content">
@@ -41,11 +40,11 @@
                                             @using (Html.BeginForm("Create", "Account", FormMethod.Post))
                                             {
                                                 <div class="form-group has-feedback">
-                                                    @Html.TextBoxFor(x => x.Email, new { @class = "form-control", placeholder = "Email", required = "required" })
+                                                    @Html.TextBoxFor(x => x.Email, new { @class = "form-control", placeholder = "Email" })
                                                     @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                                                 </div>
                                                 <div class="form-group has-feedback">
-                                                    @Html.TextBoxFor(x => x.Mobile, new { @class = "form-control", placeholder = "Mobile", required = "required" })
+                                                    @Html.TextBoxFor(x => x.Mobile, new { @class = "form-control", placeholder = "Mobile"})
                                                     @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "text-danger" })
                                                 </div>
                                                 <div class="form-group has-feedback">
@@ -53,15 +52,15 @@
                                                     @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                                                 </div>
                                                 <div class="form-group has-feedback">
-                                                    @Html.TextBoxFor(x => x.UserName, new { @class = "form-control", placeholder = "User name", required = "required" })
+                                                    @Html.TextBoxFor(x => x.UserName, new { @class = "form-control", placeholder = "User name" })
                                                     @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
                                                 </div>
                                                 <div class="form-group has-feedback">
-                                                    @Html.TextBoxFor(x => x.PassWord, new { @class = "form-control", placeholder = "password", type = "password", required = "required" })
+                                                    @Html.TextBoxFor(x => x.PassWord, new { @class = "form-control", placeholder = "password", type = "password"})
                                                     @Html.ValidationMessageFor(model => model.PassWord, "", new { @class = "text-danger" })
                                                 </div>
                                                 <div class="form-group has-feedback">
-                                                    @Html.TextBoxFor(x => x.RetypePassword, new { @class = "form-control", placeholder = "Retype password", type = "password", required = "required" })
+                                                    @Html.TextBoxFor(x => x.RetypePassword, new { @class = "form-control", placeholder = "Retype password", type = "password"})
                                                     @Html.ValidationMessageFor(model => model.RetypePassword, "", new { @class = "text-danger" })
                                                 </div>
                                                 <div class="row">
@@ -79,8 +78,8 @@
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                        </div>*@
+                    @*</div>*@
                     <div class="col-xs-12" style="padding-bottom:20px;padding-left:0px">
                     </div>
                     @Html.ValidationSummary(false, "", new { @class = "text-danger" })
@@ -96,7 +95,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var item in listuser)
+                            @foreach (var item in Model)
                             {
                                 <tr>
                                     <td>@item.UserName</td>
@@ -114,11 +113,21 @@
                         </tbody>
                     </table>
                 </div>
-                <ul id="pagination" class="pagination"></ul>
+                <div>
+                    @for (int i = 0; i <= ViewBag.maxpage; i++)
+                    {
+                        <ul class="pagination">
+                            <li class="page-item">
+                                <a class="page-link" href="@Url.Action("Index", new { pageIndex = i })">@(i + 1)</a>
+                            </li>
+                        </ul>
+                    }
+                </div>
+                @*<ul id="pagination" class="pagination"></ul>
                 <div class="pagination-holder clearfix" style="margin-top:10px">
                     <div id="light-pagination" class="pagination"></div>
                     <a data-minh="/anh1.jpg"></a>
-                </div>
+                </div>*@
             </div>
         </div>
     </div>
@@ -132,12 +141,12 @@
     <script src="~/areas/admincp/content/assets/global/scripts/jquery.simplepagination.js"></script>
     <script>
 
-        $(document).ready(function () {
-            $('#tech-article-table').DataTable({
-                "order": [[4, "asc"]],
-                "pageLength": 2
-            });
-        });
+        //$(document).ready(function () {
+        //    $('#tech-article-table').DataTable({
+        //        "order": [[4, "asc"]],
+        //        "pageLength": 2
+        //    });
+        //});
         function checkvalidate() {
             var inpEmail = document.getElementById("Email");
             var inpphone = document.getElementById("Mobile");
@@ -150,7 +159,7 @@
             }
             else if (!inpphone.checkValidity()) {
                 document.getElementById("error").innerHTML = inpObj.validationMessage;
-            }
+            }   
             else if (!inpder.checkValidity()) {
                 document.getElementById("error").innerHTML = inpObj.validationMessage;
             }
@@ -176,7 +185,8 @@
                     dataType: "json",
                     success: function (data) {
                         if (data.rs == 'ok') {
-                            $(event).closest("tr").remove();
+                            //$(event).closest("tr").remove();
+                            window.location.reload();
                         }
                     }
                 });

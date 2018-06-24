@@ -80,6 +80,12 @@
     <Compile Include="Database\Professor.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Database\SP_Accounts_getPaging_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\SP_Accounts_paging_getEmail_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Database\SP_CertificateClass_Get_all_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

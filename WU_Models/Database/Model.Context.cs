@@ -211,5 +211,35 @@ namespace WU_Models.Database
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Update_Student", studentIdParameter, studenNameParameter, programIdParameter);
         }
+    
+        public virtual ObjectResult<SP_Accounts_getPaging_Result> SP_Accounts_getPaging(Nullable<int> start, Nullable<int> length)
+        {
+            var startParameter = start.HasValue ?
+                new ObjectParameter("start", start) :
+                new ObjectParameter("start", typeof(int));
+    
+            var lengthParameter = length.HasValue ?
+                new ObjectParameter("length", length) :
+                new ObjectParameter("length", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Accounts_getPaging_Result>("SP_Accounts_getPaging", startParameter, lengthParameter);
+        }
+    
+        public virtual ObjectResult<SP_Accounts_paging_getEmail_Result> SP_Accounts_paging_getEmail(string keyString, Nullable<int> start, Nullable<int> length)
+        {
+            var keyStringParameter = keyString != null ?
+                new ObjectParameter("KeyString", keyString) :
+                new ObjectParameter("KeyString", typeof(string));
+    
+            var startParameter = start.HasValue ?
+                new ObjectParameter("start", start) :
+                new ObjectParameter("start", typeof(int));
+    
+            var lengthParameter = length.HasValue ?
+                new ObjectParameter("length", length) :
+                new ObjectParameter("length", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Accounts_paging_getEmail_Result>("SP_Accounts_paging_getEmail", keyStringParameter, startParameter, lengthParameter);
+        }
     }
 }

@@ -31,5 +31,9 @@ namespace WU_Controller.Services
         {
             return usermd.DeleteUser(user);
         }
+        public override List<vAccount> Getbypaging(int pageindex, int pagesize)
+        {
+            return usermd.Getbypaging(pageindex, pagesize);
+        }
     }
 }

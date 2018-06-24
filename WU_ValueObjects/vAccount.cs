@@ -14,12 +14,12 @@ namespace WU_ValueObjects
         [Required(ErrorMessage = "Vui lòng nhập dữ liệu cho trường này.")]
         public string UserName { get; set; }
         [Display(Name = "Mật khẩu")]
-        [DataType(DataType.Password)]
+        //[DataType(DataType.Password)]
         [Required(ErrorMessage = "Vui lòng nhập dữ liệu cho trường này.")]
         public string PassWord { get; set; }
-        [DataType(DataType.Password)]
+        //[DataType(DataType.Password)]
         [Display(Name = "Nhập lại mật khẩu")]
-        [Compare("Password", ErrorMessage = "The new password and confirmation password do not match.")]
+        //[Compare("PassWord", ErrorMessage = "Mật khẩu không giống nhau")]
         public string RetypePassword { get; set; }
         [EmailAddress]
         [Display(Name = "Email")]

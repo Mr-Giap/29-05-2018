@@ -5237,6 +5237,9 @@
     <Content Include="Areas\AdminCP\Content\assets\global\plugins\typeahead\README.md" />
     <Content Include="Areas\AdminCP\Content\assets\global\plugins\uniform\css\uniform.default.scss" />
     <Content Include="Areas\AdminCP\Content\assets\global\plugins\uniform\README.md" />
+    <Content Include="Areas\AdminCP\Views\Account\Edit.cshtml" />
+    <Content Include="Areas\AdminCP\Views\Account\Create.cshtml" />
+    <Content Include="Areas\AdminCP\Views\Account\InsertMulti.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\icheck.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />

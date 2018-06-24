@@ -23,3 +23,17 @@ A:\Git\WebUnivercity\WU_Controller\bin\Debug\EntityFramework.xml
 A:\Git\WebUnivercity\WU_Controller\obj\Debug\WU_Controller.csprojResolveAssemblyReference.cache
 A:\Git\WebUnivercity\WU_Controller\obj\Debug\WU_Controller.dll
 A:\Git\WebUnivercity\WU_Controller\obj\Debug\WU_Controller.pdb
+C:\Users\asc\Documents\git\WebUnivercity\WU_Controller\bin\Debug\WU_Controller.dll
+C:\Users\asc\Documents\git\WebUnivercity\WU_Controller\bin\Debug\WU_Controller.pdb
+C:\Users\asc\Documents\git\WebUnivercity\WU_Controller\bin\Debug\WU_Models.dll
+C:\Users\asc\Documents\git\WebUnivercity\WU_Controller\bin\Debug\WU_ValueObjects.dll
+C:\Users\asc\Documents\git\WebUnivercity\WU_Controller\bin\Debug\EntityFramework.dll
+C:\Users\asc\Documents\git\WebUnivercity\WU_Controller\bin\Debug\WU_Models.pdb
+C:\Users\asc\Documents\git\WebUnivercity\WU_Controller\bin\Debug\WU_Models.dll.config
+C:\Users\asc\Documents\git\WebUnivercity\WU_Controller\bin\Debug\WU_ValueObjects.pdb
+C:\Users\asc\Documents\git\WebUnivercity\WU_Controller\bin\Debug\EntityFramework.xml
+C:\Users\asc\Documents\git\WebUnivercity\WU_Controller\obj\Debug\WU_Controller.csprojAssemblyReference.cache
+C:\Users\asc\Documents\git\WebUnivercity\WU_Controller\obj\Debug\WU_Controller.csproj.CoreCompileInputs.cache
+C:\Users\asc\Documents\git\WebUnivercity\WU_Controller\obj\Debug\WU_Controller.csproj.CopyComplete
+C:\Users\asc\Documents\git\WebUnivercity\WU_Controller\obj\Debug\WU_Controller.dll
+C:\Users\asc\Documents\git\WebUnivercity\WU_Controller\obj\Debug\WU_Controller.pdb
